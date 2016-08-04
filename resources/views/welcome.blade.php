@@ -36,12 +36,8 @@
         <div class="container">
             <div class="content">
                 <h1>Functions list</h1>
-                <br><a href="/wechat?signature=be5378e1fc0d69bc8744deb4392ece433b50a83b&echostr=testsuccess&timestamp=1456367229&nonce=598765555">Wechat Server</a>
-                <br><a href="addsessionwechatuser">测试时模拟Session中的网页授权用户</a>
-                <br><a href="/member/auth">index</a>
-                <br><a href="/member/center">Member Center</a>
-                <br><a href="/member/register">Resiter</a>
-                <br><a href="/member/signin">Sign in</a>
+                <br><a href="/pay/test">测试时模拟Session中的网页授权用户</a>
+                <br><a href="/pay">pay</a>
             </div>
         </div>
     </body>
