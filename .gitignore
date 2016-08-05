@@ -1,16 +1,8 @@
 /vendor
 /node_modules
-<<<<<<< HEAD
 /public/storage
-=======
->>>>>>> 75855319698f02df2f32b73228a9145cfce9da40
 Homestead.yaml
 Homestead.json
 .env
 /bower_components
-<<<<<<< HEAD
-/node_modules
 /.idea
-=======
-/.idea
->>>>>>> 75855319698f02df2f32b73228a9145cfce9da40

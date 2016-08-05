@@ -95,8 +95,8 @@ class JourneyController extends Controller
             $purchaseHistory->qrcode_url = $dataPurchaseHistory['qrcode_url'];
             $purchaseHistory->save();
 
-            $paymentJS = $this->generatePaymentJS($dataPurchaseHistory);
-            //$paymentJS = '[{appid: "appid"}]';
+            //$paymentJS = $this->generatePaymentJS($dataPurchaseHistory);
+            $paymentJS = '[{appid: "appid"}]';
             if ($paymentJS) {
                 $data['paymentjs'] = $paymentJS;
                 $data{'qrcodeurl'} = $dataPurchaseHistory['qrcode_url'];

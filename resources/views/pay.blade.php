@@ -7,16 +7,9 @@
         </style>
         <script type="text/javascript">
                 //调用微信JS api 支付
-<<<<<<< HEAD
                 function jsApiCall()
                 {
                     WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $paymentjs !!}, function(res){
-=======
-                // openid: {{ $openid }}
-                function jsApiCall()
-                {
-                    WeixinJSBridge.invoke('getBrandWCPayRequest', {{ $paymentjs }}, function(res){
->>>>>>> 75855319698f02df2f32b73228a9145cfce9da40
                             if(res.err_msg == "get_brand_wcpay_request：ok" ) {
                                 alert("success");
                             }else{
