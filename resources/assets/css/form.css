@@ -1,0 +1,23 @@
+/* subnav style */
+.subnav{ height:30px; padding:9px 10px 0; border-bottom:1px solid #ddd; background-color:#ececec;}
+.subnav ul{ height:30px; width: 100%; display: table;}
+.subnav ul li{ display: table-cell;}
+.subnav ul li a{display:block; height:30px; font:normal 14px/30px simsun,arial; text-align: center;}
+.subnav ul li.selected{ position: relative;  border-top:2px solid #3a4b82}
+.subnav ul li.selected a{ height:29px; font-weight: bold; color:#3a4b82; border-left:1px solid #ddd; border-right:1px solid #ddd; background-color:#f4f4f4;}
+
+.form-login{ padding:10px 10px 20px;}
+.input-span{ height:40px; border:1px solid #ccc; margin-top:20px; border-top:1px solid #9f9f9f; display: block;}
+.input-span input{ text-indent:10px; width:100%; height: 40px; border:none; background-color:#fff;}
+.checkbox-span{ display: block; margin-top:20px; color:#666; font-size:14px;}
+.checkbox-span input{ vertical-align:middle; width:18px; height: 18px; margin-right:5px; }
+.btn-span{ display: block; padding-top: 20px;}
+.red-btn,.gray-btn{ text-align: center; display:block; height: 40px; font: bold 16px/40px 'Microsoft yahei',arial;}
+
+.login-register{ padding:0 15px 15px;}
+.login-register .table-type a{ display:table-cell; font:14px 'Microsoft yahei',arial; text-decoration: underline;}
+.login-register .table-type a:last-child{ text-align: right}
+.table-type{ width:100%; display:table;}
+.table-cell{ display:table-cell;}
+.table-cell .gray-btn{ font-size:14px; margin-top: 1px;}
+.table-cell a.gray-btn-no{ background-color: #f5f5f5; background-image:none; cursor:default; color:#999;}
