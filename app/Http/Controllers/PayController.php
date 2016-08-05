@@ -167,4 +167,7 @@ class PayController extends Controller
         return redirect("/pay");
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 75855319698f02df2f32b73228a9145cfce9da40
