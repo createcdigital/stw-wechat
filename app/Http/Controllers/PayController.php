@@ -143,20 +143,13 @@ class PayController extends Controller
     public function test(Request $request)
     {
         // fo debug
-//        $debug_user = array(
-//            'id'=> 'o6_bmjrPTlm6_2sgVt7hMZOPfL2M',
-//            'nickname'=> 'Band',
-//            'name'=> 'Band',
-//            'avatar'=>'http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0',
-//            'original'=>'{"subscribe": 1, "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M", "nickname": "Band", "sex": 1, "language": "zh_CN", "city": "广州", "province": "广东", "country": "中国", "headimgurl": "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0", "subscribe_time": 1382694957,"unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL", "remark": "","groupid": 0}',
-//            'token'=>'9NnUno3Fj7f9tAmPF5oVnp_Kch2zqCDdnef3ZypI_ePQ9Q7Moz9BWW86h0ab9R_pAIae0htpiJk0ERbd2VxngoMg7B_FPEVSZl5FEqONevuLdR0VDqbuvXhEfxRXCHCyATXaADAIBF'
-//        );
         $debug_user = array(
-            'id'=> 'onlckwsZdLbYwTnBKGdSDTUIku-I1',
-            'nickname'=> '',
-            'name'=> '',
-            'avatar'=>'',
-            'original'=>'',
+            'id'=> 'o6_bmjrPTlm6_2sgVt7hMZOPfL2M',
+            'openid'=> 'o6_bmjrPTlm6_2sgVt7hMZOPfL2M',
+            'nickname'=> 'Band',
+            'name'=> 'Band',
+            'avatar'=>'http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0',
+            'original'=>'{"subscribe": 1, "openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M", "nickname": "Band", "sex": 1, "language": "zh_CN", "city": "广州", "province": "广东", "country": "中国", "headimgurl": "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/0", "subscribe_time": 1382694957,"unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL", "remark": "","groupid": 0}',
             'token'=>'9NnUno3Fj7f9tAmPF5oVnp_Kch2zqCDdnef3ZypI_ePQ9Q7Moz9BWW86h0ab9R_pAIae0htpiJk0ERbd2VxngoMg7B_FPEVSZl5FEqONevuLdR0VDqbuvXhEfxRXCHCyATXaADAIBF'
         );
         $user = new User($debug_user);

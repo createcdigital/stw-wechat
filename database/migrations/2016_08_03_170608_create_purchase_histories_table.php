@@ -15,6 +15,18 @@ class CreatePurchaseHistoriesTable extends Migration
         Schema::create('purchase_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('openid');
+            $table->string('nickname');
+            $table->enum('sex', [0, 1, 2]); // 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知
+            $table->string('city');
+            $table->string('country');
+            $table->string('province');
+            $table->string('headimgurl');
+            $table->integer('groupid');
+            $table->string('unionid');
+            $table->string('subscribe');
+            $table->string('language');
+            $table->string('subscribe_time');
+            $table->string('remark');
             $table->string('coupon_id');
             $table->string('coupon_title');
             $table->string('coupon_set_name');
@@ -37,5 +49,3 @@ class CreatePurchaseHistoriesTable extends Migration
         Schema::drop('purchase_histories');
     }
 }
-
-

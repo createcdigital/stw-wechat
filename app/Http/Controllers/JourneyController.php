@@ -51,9 +51,9 @@ class JourneyController extends Controller
 
     public function detail($id)
     {
-        Log::info("=========detail, id:".$id);
+        //Log::info("=========detail, id:".$id);
         $stores = DB::table('coupons')->where('store_id', '=', $id)->get();
-        //dd($stores);
+
         $data['stores'] = $stores;
         $arr = json_decode($data['stores'][0]->photo_list);
         $data['stores'][0]->photo_array = $arr;
@@ -63,40 +63,27 @@ class JourneyController extends Controller
         $set_name = $data['stores'][0]->set1_name;
         $set_price = $data['stores'][0]->set1_price;
 
-        //dd($data);
-
-        $coupon_id = $data['stores'][0]->id;
-        $coupon_title = $data['stores'][0]->title;
-        $set_name = $data['stores'][0]->set1_name;
-        $set_price = $data['stores'][0]->set1_price;
 
 
         if (session()->has('wechat.oauth_user')) {
-            Log::info("=========detail, openid: " . session('wechat.oauth_user')["id"]);
-            // get param from request and session
+            //Log::info("=========detail, openid: " . session('wechat.oauth_user')["id"]);
+
+            $weChatUserInfo = $this->getWeChatUserInfo();
             $dataPurchaseHistory = [
-                "coupon_id"        => $coupon_id, // from Request
-                "coupon_title"     => $coupon_title, // from Request
-                "coupon_set_name"  => $set_name, // from Request
-                "coupon_set_price" => $set_price, // from Request
-                "openid"           => session('wechat.oauth_user')["id"], // from session
+                "coupon_id"        => $coupon_id,
+                "coupon_title"     => $coupon_title,
+                "coupon_set_name"  => $set_name,
+                "coupon_set_price" => $set_price,
+                "openid"           => $weChatUserInfo['openid'],
                 "out_trade_no"     => date("YmdHis") . uniqid(),
                 "qrcode_url"       => url('/proof') . '/' . date("YmdHis") . uniqid(),
             ];
 
-            // insert to db
-            $purchaseHistory = new PurchaseHistory;
-            $purchaseHistory->openid = $dataPurchaseHistory['openid'];
-            $purchaseHistory->coupon_id = $dataPurchaseHistory['coupon_id'];
-            $purchaseHistory->coupon_title = $dataPurchaseHistory['coupon_title'];
-            $purchaseHistory->coupon_set_name = $dataPurchaseHistory['coupon_set_name'];
-            $purchaseHistory->coupon_set_price = $dataPurchaseHistory['coupon_set_price'];
-            $purchaseHistory->out_trade_no = $dataPurchaseHistory['out_trade_no'];
-            $purchaseHistory->qrcode_url = $dataPurchaseHistory['qrcode_url'];
-            $purchaseHistory->save();
+            $this->saveToDB($weChatUserInfo, $dataPurchaseHistory);
 
-            //$paymentJS = $this->generatePaymentJS($dataPurchaseHistory);
-            $paymentJS = '[{appid: "appid"}]';
+            $paymentJS = $this->generatePaymentJS($dataPurchaseHistory);
+            // for debug
+            //$paymentJS = '[{appid: "appid"}]';
             if ($paymentJS) {
                 $data['paymentjs'] = $paymentJS;
                 $data{'qrcodeurl'} = $dataPurchaseHistory['qrcode_url'];
@@ -186,6 +173,56 @@ class JourneyController extends Controller
 
     }
 
+    /**
+     * Save to DB
+     *
+     * @param $weChatUserInfo
+     * @param $dataPurchaseHistory
+     */
+    private function saveToDB($weChatUserInfo, $dataPurchaseHistory)
+    {
+        $purchaseHistory = new PurchaseHistory;
+        $purchaseHistory->openid = $weChatUserInfo['openid'];
+        $purchaseHistory->nickname = $weChatUserInfo['nickname'];
+        $purchaseHistory->sex = $weChatUserInfo['sex'];
+        $purchaseHistory->city = $weChatUserInfo['city'];
+        $purchaseHistory->country = $weChatUserInfo['country'];
+        $purchaseHistory->province = $weChatUserInfo['province'];
+        $purchaseHistory->headimgurl = $weChatUserInfo['headimgurl'];
+        $purchaseHistory->language = $weChatUserInfo['language'];
+        // can't read from easywechat(version 3.1)
+//        $purchaseHistory->groupid = $weChatUserInfo['groupid'];
+//        $purchaseHistory->unionid = $weChatUserInfo['unionid'];
+//        $purchaseHistory->subscribe = $weChatUserInfo['subscribe'];
+//        $purchaseHistory->subscribe_time = $weChatUserInfo['subscribe_time'];
+//        $purchaseHistory->remark = $weChatUserInfo['remark'];
+        $purchaseHistory->groupid = '';
+        $purchaseHistory->unionid = '';
+        $purchaseHistory->subscribe = 0;
+        $purchaseHistory->subscribe_time = '';
+        $purchaseHistory->remark = '';
+        $purchaseHistory->coupon_id = $dataPurchaseHistory['coupon_id'];
+        $purchaseHistory->coupon_title = $dataPurchaseHistory['coupon_title'];
+        $purchaseHistory->coupon_set_name = $dataPurchaseHistory['coupon_set_name'];
+        $purchaseHistory->coupon_set_price = $dataPurchaseHistory['coupon_set_price'];
+        $purchaseHistory->out_trade_no = $dataPurchaseHistory['out_trade_no'];
+        $purchaseHistory->qrcode_url = $dataPurchaseHistory['qrcode_url'];
+        $purchaseHistory->save();
+    }
+
+    /**
+     * Get WeChat UserInfo
+     *
+     * @return mixed
+     */
+    private function getWeChatUserInfo()
+    {
+        $wechat_user = session()->get('wechat.oauth_user');
+        // for debug
+        //return json_decode($wechat_user->getOriginal());
+        return $wechat_user->getOriginal();
+    }
+
 
     /**
      * Generate to PaymentJS
@@ -193,9 +230,9 @@ class JourneyController extends Controller
      * @param $data
      * @return bool
      */
-    public function generatePaymentJS($data)
+    private function generatePaymentJS($data)
     {
-        Log::info("========generatePaymentJS, openid:" . $data['openid']);
+        //Log::info("========generatePaymentJS, openid:" . $data['openid']);
         $attributes = [
             'trade_type' => 'JSAPI',
             'body' => $data['coupon_title'] . "套餐(" . $data['coupon_set_name'] . ")",
@@ -208,7 +245,7 @@ class JourneyController extends Controller
         $order = new Order($attributes);
         $result = $this->PAYMENT->prepare($order);
 
-        Log::info("========generatePaymentJS, result:" . $result->return_msg);
+        //Log::info("========generatePaymentJS, result:" . $result->return_msg);
         if ($result->return_code == 'SUCCESS') {
             $prepayId = $result->prepay_id;
             $paymentJs = $this->PAYMENT->configForPayment($prepayId);

@@ -23,11 +23,12 @@ Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 
 Route::any('/pay/notify', 'PayController@notify');
 
-
-Route::get('/journey','JourneyController@journey');
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
-    Route::get('/detail/{id}','JourneyController@detail');
+    Route::get('/journey','JourneyController@journey');
 });
+
+Route::get('/detail/{id}','JourneyController@detail');
+
 Route::get('/proof/{orderid}','JourneyController@proof');
 Route::post('/ajax/saveProof','AjaxController@saveProof');
 
