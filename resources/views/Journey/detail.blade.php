@@ -15,7 +15,7 @@
   <body>
     <!-- header -->
     <div class="detail-header">
-      <a href="{{url('journey')}}"><</a>
+    <a href="{{url('host')}}"><</a>
     <span>优惠详情</span>
     </div>
     <!-- Banner滑动 -->
