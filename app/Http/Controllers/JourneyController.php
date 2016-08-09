@@ -30,7 +30,7 @@ class JourneyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function journey()
+    public function host()
     {
 
         $data['scenery'] = DB::table('stores')->join('coupons', 'stores.id', '=', 'coupons.store_id')->select('stores.id', 'stores.business_name', 'stores.photo_list', 'coupons.quantity_sold')->where('categories', 'like', '旅游景点%')->get();
@@ -45,7 +45,7 @@ class JourneyController extends Controller
                 $v->photo = $arr[0]->photo_url;
             }
         }
-        return view('Journey.journey', $data);
+        return view('Journey.host', $data);
     }
 
 

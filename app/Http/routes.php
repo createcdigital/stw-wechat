@@ -24,7 +24,7 @@ Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
 Route::any('/pay/notify', 'PayController@notify');
 
 Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
-    Route::get('/journey','JourneyController@journey');
+    Route::get('/host','JourneyController@host');
 });
 
 Route::get('/detail/{id}','JourneyController@detail');
