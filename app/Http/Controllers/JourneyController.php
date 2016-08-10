@@ -105,6 +105,16 @@ class JourneyController extends Controller
         return view('Journey.proof', ['qrcodeurl' => url('/ticket') . '/' . $orderid, 'jssdk' => $this->JSSDK]);//
     }
 
+
+    //二维码信息
+  public function ticketInfo($out_trade_no)
+  {
+    $data['ticketInfo'] = PurchaseHistory::where("out_trade_no","=",$out_trade_no)->get();
+    return view('Journey.ticketInfo',$data);
+
+  }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -171,10 +181,7 @@ class JourneyController extends Controller
         //
     }
 
-    public function ticketInfo($couponid)
-    {
 
-    }
 
     /**
      * Save to DB

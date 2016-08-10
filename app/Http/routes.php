@@ -32,4 +32,4 @@ Route::get('/detail/{id}','JourneyController@detail');
 Route::get('/proof/{orderid}','JourneyController@proof');
 Route::post('/ajax/saveProof','AjaxController@saveProof');
 
-Route::get('/ticket/{couponid}', 'JourneyController@ticketInfo');
+Route::get('/ticket/{out_trade_no}', 'JourneyController@ticketInfo');
