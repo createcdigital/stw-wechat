@@ -15,11 +15,7 @@
   <body>
     <!-- header -->
     <div class="detail-header">
-<<<<<<< HEAD
       <a href="{{url('host')}}"><</a>
-=======
-    <a href="{{url('host')}}"><</a>
->>>>>>> ef47a55d4f1f32b94fc77bb273aae4eb7ec2c0ab
     <span>优惠详情</span>
     </div>
     <!-- Banner滑动 -->
