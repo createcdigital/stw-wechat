@@ -72,14 +72,15 @@ class JourneyController extends Controller
             //Log::info("=========detail, openid: " . session('wechat.oauth_user')["id"]);
 
             $weChatUserInfo = $this->getWeChatUserInfo();
+            $out_trade_no = date("YmdHis") . uniqid();
             $dataPurchaseHistory = [
                 "coupon_id"        => $coupon_id,
                 "coupon_title"     => $coupon_title,
                 "coupon_set_name"  => $set_name,
                 "coupon_set_price" => $set_price,
                 "openid"           => $weChatUserInfo['openid'],
-                "out_trade_no"     => date("YmdHis") . uniqid(),
-                "qrcode_url"       => url('/proof') . '/' . date("YmdHis") . uniqid(),
+                "out_trade_no"     => $out_trade_no,
+                "qrcode_url"       => url('/proof') . '/' . $out_trade_no,
             ];
 
             $this->saveToDB($weChatUserInfo, $dataPurchaseHistory);
@@ -110,7 +111,7 @@ class JourneyController extends Controller
   public function ticketInfo($out_trade_no)
   {
     $data['ticketInfo'] = PurchaseHistory::where("out_trade_no","=",$out_trade_no)->get();
-    return view('Journey.ticketInfo',$data);
+    return view('Journey.ticketinfo',$data);
 
   }
 

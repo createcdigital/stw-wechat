@@ -157,6 +157,6 @@ class PayController extends Controller
         $request->session()->flush();
         $request->session()->put('wechat.oauth_user', $user);
 
-        return redirect("/pay");
+        return redirect("/host");
     }
 }

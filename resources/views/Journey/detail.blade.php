@@ -100,7 +100,33 @@
       </footer>
     </div>
   </body>
-
+  <script type="text/javascript">
+    //调用微信JS api 支付
+    function jsApiCall()
+    {
+      WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $paymentjs !!}, function(res){
+                if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                  window.location.href = '{{ $qrcodeurl }}';
+                }else{
+                  alert("Payment Declined!");
+                }
+              }
+      );
+    }
+    function callpay()
+    {
+      if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+          document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+        }else if (document.attachEvent){
+          document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+          document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+        }
+      }else{
+        jsApiCall();
+      }
+    }
+  </script>
   <!-- Banner滑动的JS -->
   <script>
       $(document).ready(function () {
@@ -126,6 +152,10 @@
         $(".main_image").bind("dragstart", function() {
           $dragBln = true;
         })
+
+        $(".detail-pay-ul li").click(function(){
+          callpay();
+        });
       });
   </script>
 </html>
