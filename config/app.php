@@ -159,7 +159,6 @@ return [
         /*
          * easywechat
          */
-        Overtrue\LaravelWechat\ServiceProvider::class,
 
     ],
 
@@ -210,7 +209,7 @@ return [
         /*
          * easywechat
          */
-        'Wechat' => Overtrue\LaravelWechat\Facade::class,
+
 
 
     ],

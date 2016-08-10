@@ -24,7 +24,7 @@ a {
 
 }
 
-.host_banner>img{
+.host_banner>a>img{
   width: 100%;
   height: 100%;
 

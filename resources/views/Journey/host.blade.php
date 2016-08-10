@@ -12,7 +12,9 @@
 
     <!-- banner -->
     <div class="host_banner">
+      <a href="detail/1">
       <img src="{{asset('image/beach.jpg')}}">
+      </a>
     </div>
 
     <!-- host_tab -->
@@ -38,7 +40,7 @@
               <!-- <button>立即领取</button> -->
             </div>
             <div class="content_text_info">
-              <header>--<?= $value->business_name; ?>--</header>
+              <header><?= $value->business_name; ?></header>
               <span><?= $value->quantity_sold; ?>人已领取</span>
             </div>
           </div>
@@ -58,7 +60,7 @@
               <!-- <button>立即领取</button> -->
             </div>
             <div class="content_text_info">
-              <header>--<?= $value->business_name; ?>--</header>
+              <header><?= $value->business_name; ?></header>
               <span><?= $value->quantity_sold; ?>人已领取</span>
             </div>
           </div>
@@ -78,7 +80,7 @@
               <!-- <button>立即领取</button> -->
             </div>
             <div class="content_text_info">
-              <header>--<?= $value->business_name; ?>--</header>
+              <header><?= $value->business_name; ?></header>
               <span><?= $value->quantity_sold; ?>人已领取</span>
             </div>
           </div>
@@ -98,7 +100,7 @@
               <!-- <button>立即领取</button> -->
             </div>
             <div class="content_text_info">
-              <header>--<?= $value->business_name; ?>--</header>
+              <header><?= $value->business_name; ?></header>
               <span><?= $value->quantity_sold; ?>人已领取</span>
             </div>
           </div>
