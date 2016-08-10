@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   	<title>stw-wechat</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/host.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/host.css')}}" />
     <script  type="text/javascript" src="{{asset('/js/jquery.min.js')}}"></script>
     <script  type="text/javascript" src="{{asset('/js/host.js')}}"></script>
   </head>
@@ -12,18 +12,34 @@
 
     <!-- banner -->
     <div class="host_banner">
-      <a href="detail/1">
-      <img src="{{asset('image/beach.jpg')}}">
-      </a>
+      <ul class="c scrolling">
+        <li  class="cur">
+          <a href="detail/<?php if(!empty($scenery[0])){echo $scenery[0]->id;}else{ echo 1;}?>" >
+            <img class="pc-banner" src="<?php if(!empty($scenery[0])){echo $scenery[0]->photo;}?>">
+          </a>
+        </li>
+        <li  class="cur">
+          <a href="detail/<?php if(!empty($food[0])){echo $food[0]->id;}else{ echo 1;}?>" >
+            <img class="pc-banner" src="<?php if(!empty($food[0])){echo $food[0]->photo;}?>">
+          </a>
+        </li>
+        <li  class="cur">
+          <a href="detail/<?php if(!empty($stay[0])){echo $stay[0]->id;}else{ echo 1;}?>" >
+            <img class="pc-banner" src="<?php if(!empty($stay[0])){echo $stay[0]->photo;}?>">
+          </a>
+        </li>
+      </ul>
+      <div class="scroll-nav">
+      </div>
     </div>
 
     <!-- host_tab -->
     <div class="host_tab">
       <ul class="host_tab_ul">
-        <li id="tab-scenery" style="color:rgb(38, 182, 109);">景点</li>
+        <li id="tab-scenery" style="color:#8CC153;">景点</li>
         <li id="tab-food" >美食</li>
+        <li id="tab-stay" >购物</li>
         <li id="tab-entertainment" >娱乐</li>
-        <li id="tab-stay" >住宿</li>
       </ul>
     </div>
 
@@ -109,5 +125,13 @@
       <?php } ?>
     </div>
 
+    <!-- banner_js -->
+    <script>
+        $(function(){
+          $('.host_banner').scrolling();
+        })
+    </script>
+
   </body>
+
 </html>

@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/detail.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('/css/lrzj.css')}}" />
     <script  type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+    <script  type="text/javascript" src="{{asset('js/detail.js')}}"></script>
     <script  type="text/javascript" src="{{asset('js/event.drag.min.js')}}"></script>
     <script  type="text/javascript" src="{{asset('js/touchSlider.js')}}"></script>
   </head>
@@ -15,9 +16,10 @@
   <body>
     <!-- header -->
     <div class="detail-header">
-      <a href="{{url('host')}}"><</a>
-    <span>优惠详情</span>
+      <a href="{{url('host')}}"><</a>优惠详情
     </div>
+
+
     <!-- Banner滑动 -->
     <div class="main_visual detail-banner">
       <div class="flicking_con">
@@ -52,10 +54,8 @@
         <?php if(!empty($stores)&& !empty($stores[0]->set1_name)){ ?>
           <li coupon_id="<?php if(!empty($stores)){echo $stores[0]->id;} ?>" set_name="<?=trim($stores[0]->set1_name);?>" set_price="<?=trim($stores[0]->set1_price);?>">
             <img src="{{asset('image/bingo.png')}}">
-            <span>
-              <?=trim($stores[0]->set1_name);?>
-              <?=trim($stores[0]->set1_price);?>￥
-            </span>
+              <p><?= trim($stores[0]->set1_name);?></p>
+              <span>¥<?=trim($stores[0]->set1_price);?></span>
             <a>微信支付</a>
           </li>
         <?php }?>
@@ -63,10 +63,8 @@
         <?php if(!empty($stores)&& !empty($stores[0]->set2_name)){ ?>
           <li coupon_id="<?php if(!empty($stores)){echo $stores[0]->id;} ?>" set_name="<?=trim($stores[0]->set2_name);?>" set_price="<?=trim($stores[0]->set2_price);?>">
             <img src="{{asset('image/bingo.png')}}">
-            <span>
-              <?=trim($stores[0]->set2_name);?>
-              <?=trim($stores[0]->set2_price);?>￥
-            </span>
+              <p><?= trim($stores[0]->set2_name);?></p>
+              <span>¥<?=trim($stores[0]->set2_price);?></span>
             <a>微信支付</a>
           </li>
         <?php }?>
@@ -74,10 +72,8 @@
         <?php if(!empty($stores)&& !empty($stores[0]->set3_name)){ ?>
           <li coupon_id="<?php if(!empty($stores)){echo $stores[0]->id;} ?>" set_name="<?=trim($stores[0]->set3_name);?>" set_price="<?=trim($stores[0]->set3_price);?>">
             <img src="{{asset('image/bingo.png')}}">
-            <span>
-              <?=trim($stores[0]->set3_name);?>
-              <?=trim($stores[0]->set3_price);?>￥
-            </span>
+              <p><?= trim($stores[0]->set3_name);?></p>
+              <span>¥<?=trim($stores[0]->set3_price);?></span>
             <a>微信支付</a>
           </li>
         <?php }?>
@@ -85,10 +81,8 @@
         <?php if(!empty($stores)&& !empty($stores[0]->set4_name)){ ?>
           <li coupon_id="<?php if(!empty($stores)){echo $stores[0]->id;} ?>" set_name="<?=trim($stores[0]->set4_name);?>" set_price="<?=trim($stores[0]->set4_price);?>">
             <img src="{{asset('image/bingo.png')}}">
-            <span>
-              <?=trim($stores[0]->set4_name);?>
-              <?=trim($stores[0]->set4_price);?>￥
-            </span>
+              <p><?= trim($stores[0]->set4_name);?></p>
+              <span>¥<?=trim($stores[0]->set4_price);?></span>
             <a>微信支付</a>
           </li>
         <?php }?>
@@ -98,42 +92,15 @@
 
     <!-- 产品详情 -->
     <div class="detail-specifics">
-      <header>详情: </header>
-      <section><?php if(!empty($stores)){echo $stores[0]->description;} ?></section>
+      <header>详情></header>
+      <section><p><?php if(!empty($stores)){echo $stores[0]->description;} ?></p></section>
       <footer>
-        <p>营业时间: <span><?php if(!empty($stores)){echo $stores[0]->open_time;} ?></span></p>
-        <p>服务电话: <span><?php if(!empty($stores)){echo $stores[0]->service_phone;} ?></span></p>
+        <p>营业时间:<span><?php if(!empty($stores)){echo $stores[0]->open_time;} ?></span></p>
+        <p>服务电话:<span><?php if(!empty($stores)){echo $stores[0]->service_phone;} ?></span></p>
       </footer>
     </div>
   </body>
-  <script type="text/javascript">
-    //调用微信JS api 支付
-    function jsApiCall()
-    {
-      WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $paymentjs !!}, function(res){
-                if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                  //alert("/proof");
-                  window.location.href = '{{ $qrcodeurl }}';
-                }else{
-                  alert("Payment Declined!");
-                }
-              }
-      );
-    }
-    function callpay()
-    {
-      if (typeof WeixinJSBridge == "undefined"){
-        if( document.addEventListener ){
-          document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-        }else if (document.attachEvent){
-          document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-          document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-        }
-      }else{
-        jsApiCall();
-      }
-    }
-  </script>
+
   <!-- Banner滑动的JS -->
   <script>
       $(document).ready(function () {
@@ -159,10 +126,6 @@
         $(".main_image").bind("dragstart", function() {
           $dragBln = true;
         })
-
-        $(".detail-pay-ul li").click(function(){
-          callpay();
-        });
       });
   </script>
 </html>

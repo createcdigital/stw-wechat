@@ -36,7 +36,7 @@ class JourneyController extends Controller
         $data['scenery'] = DB::table('stores')->join('coupons', 'stores.id', '=', 'coupons.store_id')->select('stores.id', 'stores.business_name', 'stores.photo_list', 'coupons.quantity_sold')->where('categories', 'like', '旅游景点%')->get();
         $data['food'] = DB::table('stores')->join('coupons', 'stores.id', '=', 'coupons.store_id')->select('stores.id', 'stores.business_name', 'stores.photo_list', 'coupons.quantity_sold')->where('categories', 'like', '美食%')->get();
         $data['entertainment'] = DB::table('stores')->join('coupons', 'stores.id', '=', 'coupons.store_id')->select('stores.id', 'stores.business_name', 'stores.photo_list', 'coupons.quantity_sold')->where('categories', 'like', '休闲娱乐%')->get();
-        $data['stay'] = DB::table('stores')->join('coupons', 'stores.id', '=', 'coupons.store_id')->select('stores.id', 'stores.business_name', 'stores.photo_list', 'coupons.quantity_sold')->where('categories', 'like', '酒店宾馆%')->get();
+        $data['stay'] = DB::table('stores')->join('coupons', 'stores.id', '=', 'coupons.store_id')->select('stores.id', 'stores.business_name', 'stores.photo_list', 'coupons.quantity_sold')->where('categories', 'like', '购物%')->get();
         //dd(json_decode($data['food'][0]->photo_list));
         //dd($data);
         foreach ($data as $key => $value) {
