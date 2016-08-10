@@ -38,7 +38,7 @@
                 <h1>Functions list</h1>
                 <br><a href="/pay/test">测试时模拟Session中的网页授权用户</a>
                 <br><a href="/pay">pay</a>
-                <br><a href="/journey">index</a>
+                <br><a href="/host">index</a>
             </div>
         </div>
     </body>

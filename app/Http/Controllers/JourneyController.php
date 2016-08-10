@@ -42,7 +42,10 @@ class JourneyController extends Controller
         foreach ($data as $key => $value) {
             foreach ($value as $k => $v) {
                 $arr = json_decode($v->photo_list);
-                $v->photo = $arr[0]->photo_url;
+                if(count($arr) > 0)
+                    $v->photo = $arr[0]->photo_url;
+                else
+                    $v->photo = "";
             }
         }
         return view('Journey.host', $data);
