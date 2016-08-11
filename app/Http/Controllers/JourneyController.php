@@ -110,8 +110,18 @@ class JourneyController extends Controller
     //二维码信息
   public function ticketInfo($out_trade_no)
   {
-    $data['ticketInfo'] = PurchaseHistory::where("out_trade_no","=",$out_trade_no)->get();
-    return view('Journey.ticketinfo',$data);
+    $from = "AUD";//澳币
+    $to = "CNY";//人民币
+    $amount =1;
+    $data = file_get_contents("http://www.baidu.com/s?wd={$from}%20{$to}&rsv_spt={$amount}");
+    preg_match("/<div>1\D*=(\d*\.\d*)\D*<\/div>/",$data, $converted);
+    $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+    $get_cur_rate =  number_format(round($converted, 3), 1);
+    $res['ticketInfo'] = PurchaseHistory::where("out_trade_no","=",$out_trade_no)->get();//二维码信息
+    if(!empty($res['ticketInfo'][0])){
+        $res['ticketInfo'][0]->coupon_cny_price = intval($res['ticketInfo'][0]->coupon_set_price)*$get_cur_rate;
+    }
+    return view('Journey.ticketInfo',$res);
 
   }
 
