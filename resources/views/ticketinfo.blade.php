@@ -16,32 +16,27 @@
       <section>
         <ul class="ticket_section_ul">
           <li>
-            <p>套餐名称:</p>
+            <p>套餐名称</p>
             <div class="section_li_text"><?php if(!empty($ticketInfo[0])){echo $ticketInfo[0]->coupon_title;}?></div>
           </li>
           <li>
-            <p>套餐价格:</p>
-            <span>¥<?php if(!empty($ticketInfo[0])){echo $ticketInfo[0]->coupon_set_price;}?></span>
+            <p>套餐价格</p>
+            <span>$<?php if(!empty($ticketInfo[0])){echo $ticketInfo[0]->coupon_set_price;}?>
+                （¥<?php if(!empty($ticketInfo[0])){echo $ticketInfo[0]->coupon_cny_price;}?>）</span>
           </li>
           <li>
-            <p>支付状态:</p>
+            <p>支付状态</p>
             <span><?php if(!empty($ticketInfo[0])){if($ticketInfo[0]->pay_status == 0){echo "未支付";}else{echo "已支付";}}?></span>
           </li>
           <li>
-            <p>购买时间:</p>
+            <p>购买时间</p>
             <span><?php if(!empty($ticketInfo[0])){echo $ticketInfo[0]->created_at;}?></span>
           </li>
         </ul>
       </section>
-
-
+      <footer>------支付信息-------</footer>
 
     </div>
-
-
-
-
-
 
   </body>
 
