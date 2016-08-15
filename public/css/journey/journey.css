@@ -8,11 +8,13 @@ li {
     list-style: none;
 }
 a {
+    text-decoration: none;
     color: black;
 }
 .host-banner {
     width: 100%;
     height: 30%;
+    *border:1px solid red;
 }
 .host-banner>img {
     width: 100%;
@@ -79,11 +81,11 @@ a {
 }
 .list-content-text>p {
     *float: left;
-    margin-top: 5%;
+    margin-top: 2%;
     font-size: 14px;
 }
 .list-content-text>span {
-    margin-top: 10%;
+    margin-top: 8%;
     font-size: 12px;
     float: left;
     color: gray;

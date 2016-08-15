@@ -62,6 +62,10 @@ a {
   width: 100%;
   margin-top: 5%;
 }
+
+.ticket_section_ul>li:first-child{
+  margin-bottom: 15%;
+}
 .ticket_section_ul>li>p{
   float: left;
   font-size: 1em;

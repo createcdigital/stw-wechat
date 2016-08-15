@@ -50,8 +50,8 @@ a {
   }
   .scroll-nav li{
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     background-color: #fff;
     border-radius: 20px;
     margin-right: 5px;
@@ -63,7 +63,7 @@ a {
   }
   .scroll-nav li.cur{
     color: #fff;
-    background-color: #8CC153;
+    background-color: #fff;
   }
 
 .host_tab{
