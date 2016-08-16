@@ -179,7 +179,7 @@ class CouponDetailController extends BaseController
 
         }
 
-        return view('/');
+        return redirect('/');
     }
 
     private function getFoodData($location_code){

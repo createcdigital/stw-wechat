@@ -62,6 +62,49 @@ class PayController extends Controller
         //
     }
 
+    public function notify()
+    {
+        $response = $this->PAYMENT->handleNotify(function($notify, $successful){
+            Log::info("============pay notify, successful:".$successful);
+
+            if($successful)
+            {
+                Log::info("============pay notify data, out_trade_no:".$notify->out_trade_no.", transaction_id: ".$notify->transaction_id);
+
+                $order = PurchaseHistory::where('out_trade_no', $notify->out_trade_no)->first();
+                if($order == null)
+                {
+                    return true;
+                }
+
+                if($order->pay_status == 1)
+                {
+                    return true;
+                }
+
+                if($successful)
+                {
+                    $order->transaction_id = $notify->transaction_id;
+                    $order->pay_status = 1;
+
+                }else
+                {
+                    $order->transaction_id = $notify->transaction_id;
+                    $order->pay_status = 2;
+                }
+
+                $order->save();
+            }else
+            {
+                Log::info("============pay fail");
+            }
+
+            return true;
+        });
+
+        return $response;
+    }
+
     /**
      * Store a newly created resource in storage.
      *

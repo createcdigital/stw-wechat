@@ -1,100 +1,118 @@
- @extends('_base_layout')
+@extends('_base_layout')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/proof.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/common.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/qrcode.css')}}" />
+    @endsection
+
+
+    @section('content')
+    <!-- header -->
+    <div class="common_header">
+        <div class="common_header_left">
+            <button>凯恩斯</button>
+        </div>
+        <div class="common_header_right">
+            <div class="common_header_pattern"> <img src="{{asset('/image/weather.jpg')}}"></div>
+            <div class="common_header_temperature">22<span class="d">°C</span></div>
+        </div>
+    </div>
+
+    <!-- qrcode_container -->
+
+    <div class="qrcode_container">
+      <div class="qrcode_container_code">
+        <div class="qrcode_container_code_img">
+          <div class="qrcode_container_code_img_up" id="qrcode">
+          </div>
+        <div class="qrcode_container_code_img_down">分享到朋友圈可见二维码！</div>
+        <div class="qrcode_container_code_img_down">截屏此页，并妥善保存！</div>
+        </div>
+      </div>
+      <img src="{{asset('/image/postmark.png')}}" class="postmark">
+    </div>
+
+
+
+    <!-- bottom -->
+    <div class="common_bottom">
+        <img src="{{asset('/image/bottom-bar.png')}}">
+    </div>
 @endsection
 
-
-@section('content')
-    <div class="container">
-      <div class="p1">支付凭证</div>
-      <div class="p2">截屏保存此页到相册,并妥善保管</div>
-      <div id="qrcode" class="qrcode"></div>
-      <div class="modal"></div>
-      <div class="hit">分享页面后可见二维码</div>
-    </div>
-
-    <div class="help">
-      <div>优惠券使用流程:</div>
-      <div class="wrap-item">
-        <div class="item">分享朋友圈截屏二维码凭证</div>
-        <div class="d">&gt;</div>
-        <div class="item">到达景点后出示二维码凭证</div>
-        <div class="d">&gt;</div>
-        <div class="item">完成购票</div>
-      </div>
-    </div>
-
-  @endsection
-
-  @section('js')
+@section('js')
     <script  type="text/javascript" src="{{asset('/js/qrcode.js')}}"></script>
     <script type="text/javascript">
-      (function(){
-          var qrcode = new QRCode('qrcode', {
-            //text: 'ymc',
-            width: 300,
-            height: 300,
-            colorDark : '#000000',
-            colorLight : '#ffffff',
-            correctLevel : QRCode.CorrectLevel.H
-          });
+        (function(){
+            var qrcode = new QRCode('qrcode', {
+                //text: 'ymc',
+                width: 300,
+                height: 300,
+                colorDark : '#000000',
+                colorLight : '#ffffff',
+                correctLevel : QRCode.CorrectLevel.H
+            });
 
-          qrcode.clear();
-          qrcode.makeCode('{{ $qrcodeurl }}');
+            qrcode.clear();
+            qrcode.makeCode('{{ $qrcodeurl }}');
         })();
     </script>
-  @endsection
+@endsection
 
-  @section('wechatshare')
+@section('wechatshare')
     <script language="javascript">
-      wx.ready(function () {
+        function removeBlur()
+        {
+            $(".qrcode_container_code_img_up").find("img").css('-webkit-filter', 'blur(0px)');
+        }
 
-        wx.onMenuShareTimeline({
-          title: 'SHAKE TO WIN',
-          link: 'http://stwweixin.createcdigital.com/',
-          imgUrl: '{{ asset('img/share-icon.png') }}',
-          success: function () {
-            $(".modal").hide();
-          },
-          cancel: function () {
-          }
-        });
-        wx.onMenuShareAppMessage({
-          title: 'SHAKE TO WIN',
-          title: 'SHAKE TO WIN',
-          link: 'http://stwweixin.createcdigital.com/',
-          imgUrl: '{{ asset('img/share-icon.png') }}',
-          success: function () {
-            $(".modal").hide();
-          },
-          cancel: function () {
+        wx.ready(function () {
 
-          }
-        });
-        wx.onMenuShareQQ({
-          title: 'SHAKE TO WIN',
-          title: 'SHAKE TO WIN',
-          link: 'http://stwweixin.createcdigital.com/',
-          imgUrl: '{{ asset('img/share-icon.png') }}',
-          success: function () {
-            $(".modal").hide();
-          },
-          cancel: function () {
-          }
-        });
-        wx.onMenuShareWeibo({
-          title: 'SHAKE TO WIN',
-          title: 'SHAKE TO WIN',
-          link: 'http://stwweixin.createcdigital.com/',
-          imgUrl: '{{ asset('img/share-icon.png') }}',
-          success: function () {
-            $(".modal").hide();
-          },
-          cancel: function () {
-          }
-        });
+            wx.onMenuShareTimeline({
+                title: '我成功抢购了凯恩斯的优惠卷一张！准备好跟我一起出发吧！',
+                link: 'http://stwweixin.createcdigital.com',
+                imgUrl: '{{ asset('img/share-icon.png') }}',
+                success: function () {
+                    removeBlur();
+                },
+                cancel: function () {
+                }
+            });
+            wx.onMenuShareAppMessage({
+                title: '凯恩斯STW疯享优惠',
+                desc: '我成功抢购了凯恩斯的优惠卷一张！准备好跟我一起出发吧！',
+                link: 'http://stwweixin.createcdigital.com/',
+                imgUrl: '{{ asset('img/share-icon.png') }}',
+                success: function () {
+                    removeBlur();
+                },
+                cancel: function () {
 
-      });
+                }
+            });
+            wx.onMenuShareQQ({
+                title: '凯恩斯STW疯享优惠',
+                desc: '我成功抢购了凯恩斯的优惠卷一张！准备好跟我一起出发吧！',
+                link: 'http://stwweixin.createcdigital.com/',
+                imgUrl: '{{ asset('img/share-icon.png') }}',
+                success: function () {
+                    removeBlur();
+                },
+                cancel: function () {
+                }
+            });
+            wx.onMenuShareWeibo({
+                title: '凯恩斯STW疯享优惠',
+                desc: '我成功抢购了凯恩斯的优惠卷一张！准备好跟我一起出发吧！',
+                link: 'http://stwweixin.createcdigital.com/',
+                imgUrl: '{{ asset('img/share-icon.png') }}',
+                success: function () {
+                    removeBlur();
+                },
+                cancel: function () {
+                }
+            });
+
+        });
     </script>
 @endsection

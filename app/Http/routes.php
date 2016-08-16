@@ -19,7 +19,7 @@ Route::post('/homepage/{categoryId}', 'HomePageController@getDataByCategoryId');
 
 Route::get('/store/{id}', 'StoreController@index');
 
-Route::get('/coupon/{id}/{package}','CouponDetailController@index');
+Route::get('/coupon/{id}&{package}','CouponDetailController@index');
 
 Route::any('/pay/notify', 'PayController@notify');
 

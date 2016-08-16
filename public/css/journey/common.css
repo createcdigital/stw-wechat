@@ -1,11 +1,14 @@
 @charset "utf-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 * {
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: 'Noto Sans TC', sans-serif, serif;
     margin: 0;
     padding: 0;
     list-style: none;
     box-sizing: border-box;
-    font-weight: 100;
+    font-weight: 500;
 }
 img {
     border: none;
@@ -35,16 +38,15 @@ a {
 }
 .common_header_left>button{
   width: auto;
-  padding-left:10px;
-  padding-right:10px;
-  height: 50%;
+  padding: 5px 28px;
+  height: 50px;
   border: 1px solid;
-  font-size: 23px;
+  font-size: 25px;
   border-radius: 30px;
   background-color:transparent;
   opacity: 0.8;
   margin-top: 7%;
-  margin-left: 10px;
+  margin-left: 40px;
   color: #fff;
 
 }

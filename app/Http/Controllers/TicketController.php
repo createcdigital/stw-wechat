@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PurchaseHistory;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,8 +18,12 @@ class TicketController extends BaseController
 
     public function ticketInfo($out_trade_no)
     {
-        $data['ticketInfo'] = PurchaseHistory::where("out_trade_no","=",$out_trade_no)->get();
-        return view('ticketinfo',$data);
+        $ticketinfo = PurchaseHistory::where("out_trade_no", $out_trade_no)->first();
+
+        if($ticketinfo != null)
+            return view('ticketinfo',['ticketinfo' => $ticketinfo]);
+        else
+            return redirect('/');
 
     }
 }

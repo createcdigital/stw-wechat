@@ -11,7 +11,7 @@
 @section('content')
     <div class="common_header">
         <div class="common_header_left">
-            <button>{{ $store_name }}</button>
+            <button>凯恩斯</button>
         </div>
         <div class="common_header_right">
             <div class="common_header_pattern"> <img src="{{asset('/image/weather.jpg')}}"></div>
@@ -177,9 +177,8 @@
     <script language="javascript">
         wx.ready(function () {
 
-
             wx.onMenuShareTimeline({
-                title: 'SHAKE TO WIN',
+                title: '我成功抢购了凯恩斯的优惠卷一张！准备好跟我一起出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -188,8 +187,8 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我成功抢购了凯恩斯的优惠卷一张！准备好跟我一起出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -200,8 +199,8 @@
                 }
             });
             wx.onMenuShareQQ({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -211,8 +210,8 @@
                 }
             });
             wx.onMenuShareWeibo({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {

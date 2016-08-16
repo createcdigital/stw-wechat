@@ -63,7 +63,7 @@
 
                     </div>
                     <div class="host_stores_text_right">
-                        <span>已有{{ $item['purchaseCount'] }}人领取</span>
+                        <span>已有{{ $item['purchaseCount'] }}人购买</span>
                     </div>
 
                 </div>
@@ -86,7 +86,7 @@
 
                         </div>
                         <div class="host_stores_text_right">
-                            <span>已有{{ $item['purchaseCount'] }}人领取</span>
+                            <span>已有{{ $item['purchaseCount'] }}人购买</span>
                         </div>
 
                     </div>
@@ -109,7 +109,7 @@
 
                         </div>
                         <div class="host_stores_text_right">
-                            <span>已有{{ $item['purchaseCount'] }}人领取</span>
+                            <span>已有{{ $item['purchaseCount'] }}人购买</span>
                         </div>
 
                     </div>
@@ -132,7 +132,7 @@
 
                         </div>
                         <div class="host_stores_text_right">
-                            <span>已有{{ $item['purchaseCount'] }}人领取</span>
+                            <span>已有{{ $item['purchaseCount'] }}人购买</span>
                         </div>
 
                     </div>
@@ -165,7 +165,7 @@
         wx.ready(function () {
 
             wx.onMenuShareTimeline({
-                title: 'SHAKE TO WIN',
+                title: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -174,8 +174,8 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -186,8 +186,8 @@
                 }
             });
             wx.onMenuShareQQ({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -197,8 +197,8 @@
                 }
             });
             wx.onMenuShareWeibo({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {

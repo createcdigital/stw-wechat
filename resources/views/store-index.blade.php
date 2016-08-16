@@ -11,7 +11,7 @@
 @section('content')
     <div class="common_header">
         <div class="common_header_left">
-            <button>{{ $coupon->store_name }}</button>
+            <button>凯恩斯</button>
         </div>
         <div class="common_header_right">
             <div class="common_header_pattern"> <img src="{{asset('/image/weather.jpg')}}"></div>
@@ -27,9 +27,7 @@
         <ul class="c scrolling">
             @forelse ($sliderList as $slider)
                 <li  class="cur">
-                    <a href="{{ url('/locate') }}" >
                         <img class="pc-banner" src="{{ $slider->photo_url }}">
-                    </a>
                 </li>
             @empty
                 <p class="null-data">暂时没有数据</p>
@@ -52,7 +50,7 @@
     <div class="coupon_content">
         <ul class="category-list coupon coupon_content_ul">
             @if ($coupon->package_a_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/a">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&a">
             <li>
                 <div class="coupon_content_li_left">优惠套餐A</div>
                 <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -73,7 +71,7 @@
             @endif
 
             @if ($coupon->package_b_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/b">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&b">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐B</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -94,7 +92,7 @@
             @endif
 
             @if ($coupon->package_c_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/c">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&c">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐C</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -115,7 +113,7 @@
             @endif
 
             @if ($coupon->package_d_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/d">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&d">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐D</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -136,7 +134,7 @@
             @endif
 
             @if ($coupon->package_e_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/e">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&e">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐E</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -157,7 +155,7 @@
             @endif
 
             @if ($coupon->package_f_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/f">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&f">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐F</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -178,7 +176,7 @@
             @endif
 
             @if ($coupon->package_g_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/g">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&g">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐G</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -199,7 +197,7 @@
             @endif
 
             @if ($coupon->package_h_title != "")
-            <a href="{{ url('/coupon/') }}/{{$coupon->id}}/h">
+            <a href="{{ url('/coupon/') }}/{{$coupon->id}}&h">
                 <li>
                     <div class="coupon_content_li_left">优惠套餐H</div>
                     <!--  <div class="coupon_content_li_left_side"></div>-->
@@ -312,9 +310,8 @@
     <script language="javascript">
         wx.ready(function () {
 
-
             wx.onMenuShareTimeline({
-                title: 'SHAKE TO WIN',
+                title: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -323,8 +320,8 @@
                 }
             });
             wx.onMenuShareAppMessage({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -335,8 +332,8 @@
                 }
             });
             wx.onMenuShareQQ({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {
@@ -346,8 +343,8 @@
                 }
             });
             wx.onMenuShareWeibo({
-                title: 'SHAKE TO WIN',
-                title: 'SHAKE TO WIN',
+                title: '凯恩斯STW疯享优惠',
+                desc: '我抢购了凯恩斯的非凡旅程，爱上绿，恋上蓝，立即出发吧！',
                 link: 'http://stwweixin.createcdigital.com',
                 imgUrl: '{{ asset('img/share-icon.png') }}',
                 success: function () {

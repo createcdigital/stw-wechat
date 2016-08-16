@@ -17,10 +17,10 @@ class PurchaseHistory extends Model
         switch($value)
         {
             case 0:
-                return "Not Paid";
+                return "未支付";
                 break;
             case 1:
-                return "Paid";
+                return "已支付";
                 break;
         }
     }
