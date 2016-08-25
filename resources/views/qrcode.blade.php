@@ -1,8 +1,8 @@
 @extends('_base_layout')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/common.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/qrcode.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/common.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/qrcode.css')}}" />
     @endsection
 
 
@@ -13,7 +13,7 @@
             <button>凯恩斯</button>
         </div>
         <div class="common_header_right">
-            <div class="common_header_pattern"> <img src="{{asset('/image/weather.jpg')}}"></div>
+            <div class="common_header_pattern"> <img src="{{asset('/img/weather.jpg')}}"></div>
             <div class="common_header_temperature">22<span class="d">°C</span></div>
         </div>
     </div>
@@ -29,14 +29,14 @@
         <div class="qrcode_container_code_img_down">截屏此页，并妥善保存！</div>
         </div>
       </div>
-      <img src="{{asset('/image/postmark.png')}}" class="postmark">
+      <img src="{{asset('/img/postmark.png')}}" class="postmark">
     </div>
 
 
 
     <!-- bottom -->
     <div class="common_bottom">
-        <img src="{{asset('/image/bottom-bar.png')}}">
+        <img src="{{asset('/img/bottom-bar.png')}}">
     </div>
 @endsection
 

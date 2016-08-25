@@ -11,9 +11,9 @@
 |
 */
 
-//Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
+Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
     Route::get('/', 'HomePageController@homepage');
-//});
+});
 
 Route::post('/homepage/{categoryId}', 'HomePageController@getDataByCategoryId');
 

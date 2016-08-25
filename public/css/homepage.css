@@ -88,7 +88,7 @@
   height:25%;
   *border: 1px solid;
   margin-top: 5%;
-  background-image: url("/image/host1.png");
+  background-image: url("/img/host1.png");
 }
 .host_stores_ul>li:first-child{
   margin-top: 0;

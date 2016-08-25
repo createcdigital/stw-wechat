@@ -1,8 +1,8 @@
 @extends('_base_layout')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/common.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/journey/newHost.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/common.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('/css/homepage.css')}}" />
 
 
 @endsection
@@ -14,7 +14,7 @@
             <button>凯恩斯</button>
         </div>
         <div class="common_header_right">
-            <div class="common_header_pattern"> <img src="{{asset('/image/weather.jpg')}}"></div>
+            <div class="common_header_pattern"> <img src="{{asset('/img/weather.jpg')}}"></div>
             <div class="common_header_temperature">22<span class="d">°C</span></div>
 
         </div>
@@ -148,7 +148,7 @@
 
     <!-- bottom -->
     <div class="common_bottom">
-        <img src="{{asset('/image/bottom-bar.png')}}">
+        <img src="{{asset('/img/bottom-bar.png')}}">
     </div>
 
 @endsection

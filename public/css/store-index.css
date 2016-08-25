@@ -131,7 +131,7 @@
   font-size: 17px;
   line-height: 2.3em;
   padding-left: 15%;
-  background-image: url("/image/logo2.jpg");
+  background-image: url("/img/logo2.jpg");
   background-repeat:no-repeat;
   background-size: 15% 100%;
   font-weight: 300;
@@ -144,7 +144,7 @@
   font-size: 18px;
     line-height: 2.3em;
   padding-left: 15%;
-  background-image: url("/image/logo1.jpg");
+  background-image: url("/img/logo1.jpg");
   background-repeat:no-repeat;
   background-size: 18% 100%;
   background-position:-2%;
@@ -167,7 +167,7 @@
   padding-left: 18%;
   letter-spacing: 0.2em;
   color:#fe8b61;
-  background-image: url("/image/logo3.jpg");
+  background-image: url("/img/logo3.jpg");
   background-repeat:no-repeat;
   background-size: 20% 80%;
   background-position:8%;
