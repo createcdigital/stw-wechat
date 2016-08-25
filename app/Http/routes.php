@@ -11,25 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
+    Route::get('/', 'HomePageController@homepage');
+//});
 
-Route::get('/pay/test', 'PayController@test');
+Route::post('/homepage/{categoryId}', 'HomePageController@getDataByCategoryId');
 
-Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
-    Route::get('/pay', 'PayController@pay');
-});
+Route::get('/store/{id}', 'StoreController@index');
+
+Route::get('/coupon/{id}&{package}','CouponDetailController@index');
 
 Route::any('/pay/notify', 'PayController@notify');
 
-Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
-    Route::get('/host','JourneyController@host');
-});
+Route::get('/pay/test','PayController@test');
 
-Route::get('/detail/{id}','JourneyController@detail');
+Route::get('/qrcode/{orderid}','TicketController@qrcode');
 
-Route::get('/proof/{orderid}','JourneyController@proof');
-Route::post('/ajax/saveProof','AjaxController@saveProof');
-
-Route::get('/ticket/{out_trade_no}', 'JourneyController@ticketInfo');
+Route::get('/ticket/{out_trade_no}', 'TicketController@ticketInfo');

@@ -27,8 +27,9 @@ class CreatePurchaseHistoriesTable extends Migration
             $table->string('language');
             $table->string('subscribe_time');
             $table->string('remark');
-            $table->string('coupon_id');
-            $table->string('coupon_title');
+            $table->integer('store_id');
+            $table->string('store_name');
+            $table->integer('coupon_id');
             $table->string('coupon_set_name');
             $table->double('coupon_set_price', 5,2);
             $table->integer('pay_status')->default(0); // 0: 未付款, 1: 已付款

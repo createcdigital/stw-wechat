@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupon;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use DB;
 use App\Models\PurchaseHistory;
 use EasyWeChat\Payment\Order;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Log;
 use Overtrue\Socialite\User;
 
 class PayController extends Controller
 {
     protected $PAYMENT;
+    protected $JSSDK;
 
     /**
      * PayController constructor.
@@ -20,80 +23,45 @@ class PayController extends Controller
     public function __construct()
     {
         $this->PAYMENT = app('wechat')->payment;
+        $this->JSSDK = app('wechat')->js;
     }
 
 
-    /**
-     * pay
-     */
-    public function pay()
+
+    public function pay($id, $p)
     {
-        if (session()->has('wechat.oauth_user')) {
 
-            // get param from request and session
-            $data = [
-                "coupon_id" => 1, // from Request
-                "coupon_title" => "优惠卷标题", // from Request
-                "coupon_set_name" => "单人套餐", // from Request
-                "coupon_set_price" => "1", // from Request
-                "openid" => session('wechat.oauth_user')["id"], // from session
-                "out_trade_no" => date("YmdHis") . uniqid(),
-            ];
 
-            // insert to db
-            $purchaseHistory =  new PurchaseHistory;
-            $purchaseHistory->openid = $data['openid'];
-            $purchaseHistory->coupon_id = $data['coupon_id'];
-            $purchaseHistory->coupon_title = $data['coupon_title'];
-            $purchaseHistory->coupon_set_name = $data['coupon_set_name'];
-            $purchaseHistory->coupon_set_price = $data['coupon_set_price'];
-            $purchaseHistory->out_trade_no = $data['out_trade_no'];
-            $purchaseHistory->save();
-
-            $paymentJS = $this->generatePaymentJS($data);
-            if($paymentJS)
-                return view('pay', ['openid' => $data['openid'], 'paymentjs' => $paymentJS]);
-
-        }
 
         return redirect('/');
     }
 
-    /**
-     * Generate to PaymentJS
-     *
-     * @param $data
-     * @return bool
-     */
-    public function generatePaymentJS($data)
+
+    public function proof($orderid)
     {
-        $attributes = [
-            'trade_type' => 'JSAPI',
-            'body' => $data['coupon_title']."套餐(".$data['coupon_set_name'].")",
-            'detail' => $data['coupon_title']."套餐(".$data['coupon_set_name'].")",
-            'out_trade_no' =>  $data['out_trade_no'],
-            'total_fee' => str_replace(".", "", $data['coupon_set_price']),
-            'notify_url' => url('/pay/notify'),
-            'openid' => $data['openid'],
-        ];
-        $order = new Order($attributes);
-        $result = $this->PAYMENT->prepare($order);
-
-        if ($result->return_code == 'SUCCESS') {
-            $prepayId = $result->prepay_id;
-            $paymentJs = $this->PAYMENT->configForPayment($prepayId);
-
-            return $paymentJs;
-        }
-
-        return false;
+        return view('Journey.proof', ['qrcodeurl' => url('/ticket') . '/' . $orderid, 'jssdk' => $this->JSSDK]);//
     }
 
+
+    //二维码信息
+  public function ticketInfo($out_trade_no)
+  {
+    $data['ticketInfo'] = PurchaseHistory::where("out_trade_no","=",$out_trade_no)->get();
+    return view('Journey.ticketinfo',$data);
+
+  }
+
+
     /**
-     * pay notify
+     * Show the form for creating a new resource.
      *
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
+    public function create()
+    {
+        //
+    }
+
     public function notify()
     {
         $response = $this->PAYMENT->handleNotify(function($notify, $successful){
@@ -138,6 +106,149 @@ class PayController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+
+
+    /**
+     * Save to DB
+     *
+     * @param $weChatUserInfo
+     * @param $dataPurchaseHistory
+     */
+    private function saveToDB($weChatUserInfo, $dataPurchaseHistory)
+    {
+        $purchaseHistory = new PurchaseHistory;
+        $purchaseHistory->openid = $weChatUserInfo['openid'];
+        $purchaseHistory->nickname = $weChatUserInfo['nickname'];
+        $purchaseHistory->sex = $weChatUserInfo['sex'];
+        $purchaseHistory->city = $weChatUserInfo['city'];
+        $purchaseHistory->country = $weChatUserInfo['country'];
+        $purchaseHistory->province = $weChatUserInfo['province'];
+        $purchaseHistory->headimgurl = $weChatUserInfo['headimgurl'];
+        $purchaseHistory->language = $weChatUserInfo['language'];
+        // can't read from easywechat(version 3.1)
+//        $purchaseHistory->groupid = $weChatUserInfo['groupid'];
+//        $purchaseHistory->unionid = $weChatUserInfo['unionid'];
+//        $purchaseHistory->subscribe = $weChatUserInfo['subscribe'];
+//        $purchaseHistory->subscribe_time = $weChatUserInfo['subscribe_time'];
+//        $purchaseHistory->remark = $weChatUserInfo['remark'];
+        $purchaseHistory->groupid = '';
+        $purchaseHistory->unionid = '';
+        $purchaseHistory->subscribe = 0;
+        $purchaseHistory->subscribe_time = '';
+        $purchaseHistory->remark = '';
+        $purchaseHistory->store_id = $dataPurchaseHistory['store_id'];
+        $purchaseHistory->store_name = $dataPurchaseHistory['store_name'];
+        $purchaseHistory->coupon_id = $dataPurchaseHistory['coupon_id'];
+        $purchaseHistory->coupon_set_name = $dataPurchaseHistory['coupon_set_name'];
+        $purchaseHistory->coupon_set_price = $dataPurchaseHistory['coupon_set_price'];
+        $purchaseHistory->out_trade_no = $dataPurchaseHistory['out_trade_no'];
+        $purchaseHistory->qrcode_url = $dataPurchaseHistory['qrcode_url'];
+        $purchaseHistory->save();
+    }
+
+    /**
+     * Get WeChat UserInfo
+     *
+     * @return mixed
+     */
+    private function getWeChatUserInfo()
+    {
+        $wechat_user = session()->get('wechat.oauth_user');
+        // for debug
+        //return json_decode($wechat_user->getOriginal());
+        return $wechat_user->getOriginal();
+    }
+
+
+    /**
+     * Generate to PaymentJS
+     *
+     * @param $data
+     * @return bool
+     */
+    private function generatePaymentJS($data)
+    {
+        //Log::info("========generatePaymentJS, openid:" . $data['openid']);
+        $attributes = [
+            'trade_type' => 'JSAPI',
+            'body' => $data['store_name'] . "套餐(" . $data['coupon_set_name'] . ")",
+            'detail' => $data['store_name'] . "套餐(" . $data['coupon_set_name'] . ")",
+            'out_trade_no' => $data['out_trade_no'],
+            'total_fee' => str_replace(".", "", $data['coupon_set_price']),
+            'notify_url' => url('/pay/notify'),
+            'openid' => $data['openid'],
+        ];
+        $order = new Order($attributes);
+        $result = $this->PAYMENT->prepare($order);
+
+        //Log::info("========generatePaymentJS, result:" . $result->return_msg);
+        if ($result->return_code == 'SUCCESS') {
+            $prepayId = $result->prepay_id;
+            $paymentJs = $this->PAYMENT->configForPayment($prepayId);
+
+            return $paymentJs;
+        }
+
+        return false;
+    }
+
+
+    /**
      * test for wechat oauth
      */
     public function test(Request $request)
@@ -153,10 +264,8 @@ class PayController extends Controller
             'token'=>'9NnUno3Fj7f9tAmPF5oVnp_Kch2zqCDdnef3ZypI_ePQ9Q7Moz9BWW86h0ab9R_pAIae0htpiJk0ERbd2VxngoMg7B_FPEVSZl5FEqONevuLdR0VDqbuvXhEfxRXCHCyATXaADAIBF'
         );
         $user = new User($debug_user);
-
         $request->session()->flush();
         $request->session()->put('wechat.oauth_user', $user);
-
-        return redirect("/host");
+        return redirect("/");
     }
 }
